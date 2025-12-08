@@ -86,3 +86,51 @@ Go to Settings → About Phone.
 Tap "Build Number" seven times to unlock Developer Options.
 Go to Developer Options.
 Enable USB Debugging.
+
+
+2] ODD/EVEN CHECKER
+
+Even/Odd Checker App – README Update
+Integration
+The Even/Odd Checker App from the classroom assignment has been added to the main Flutter project inside the existing cyberlog application.
+The updated main.dart file now includes:
+A TextField for number input
+An ElevatedButton to trigger the check
+Conditional logic to determine even or odd
+A Text widget to display the result
+String interpolation for formatting output
+
+JIT vs AOT Compilation
+Dart uses two different compilation strategies depending on the stage of development:
+
+JIT (Just-in-Time) Compilation
+Used during development when running the app through an emulator or device.
+Allows Hot Reload by compiling code while the program is running.
+Helps in quickly testing UI changes and updating logic without restarting the entire application.
+
+AOT (Ahead-of-Time) Compilation
+Used for release builds that are deployed to the Play Store or App Store.
+Converts Dart code into optimized native machine code before execution.
+Provides fast startup time and smooth performance in production.
+Flutter uses JIT for development speed and AOT for runtime performance.
+
+Use of Conditionals for Even/Odd Logic
+The Even/Odd logic in the app uses Dart's if-else conditional structure.
+After reading the number from the TextField and converting it into an integer, the condition:
+if (number % 2 == 0)
+checks whether the remainder is zero.
+If true, the number is even; otherwise, it is odd.
+The result is stored in a String variable and displayed on the UI.
+Use of String Interpolation
+To display a clean result message to the user, Dart’s string interpolation feature was used:
+"The number $number is Even."
+Using $number inserts the actual value directly into the message without needing concatenation.
+This makes the final output text simple, readable, and dynamic.
+
+
+
+
+
+
+
+

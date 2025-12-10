@@ -1,56 +1,56 @@
-  import 'package:flutter/material.dart';
-
+import 'package:flutter/material.dart';
 void main() {
-  runApp(const OddEvenDemo());
+  runApp(const MyApp());
 }
-
-class OddEvenDemo extends StatelessWidget {
-  const OddEvenDemo({super.key});
+class Log {
+  String action;
+  DateTime timestamp;
+  String status;
+  Log({required this.action, required this.timestamp, required this.status});
+}
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
-    String result = "";
+    List<Log> logs = [
+      Log(action: "Sign-in", timestamp: DateTime.now(), status: "Active"),
+      Log(action: "Logout", timestamp: DateTime.now().add(const Duration(minutes: 5)), status: "Success"),
+    ];
     return MaterialApp(
       home: Scaffold(
-        body: StatefulBuilder(
-          builder: (context, setState) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextField(
-                    controller: controller, decoration: const InputDecoration(
-                    labelText: "Enter a number",
-                    ),
-                    keyboardType: TextInputType.number,
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 11, 86, 147),    
-                      foregroundColor: Colors.white,  
-                    ),
-                    onPressed: () {
-                      int number = int.parse(controller.text);
-                      if (number % 2 == 0) {
-                        result = "The number $number is Even.";
-                      } else {
-                        result = "The number $number is Odd.";
-                      }
-                  setState(() {});
-                    },
-                    child: const Text("Check"),
-                  ),
-                  Text(
-                    "$result",   
-                    style: const TextStyle(fontSize: 20, color: Color.fromARGB(255, 134, 45, 150),),
-                    
-                  ),
-                ],
-              ),
-            );
-          },
+        appBar: AppBar(title: const Text("Portfolio Assignment")),
+        body: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    const Text("LOGS:",
+      style: TextStyle(
+        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.purple,
+      ),),
+    ...logs.map( (log) => Text("${log.action} -- ${log.timestamp}",
+        style: const TextStyle(
+          fontSize: 16,
+          color: Colors.black87,
         ),
       ),
-    );
-  }
-}
+    ),
+    const SizedBox(height: 20),
+    const Text("STATUS:",
+      style: TextStyle(
+        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.purple,
+      ),
+    ),
+    ...logs.map((log) => Text(log.status,
+        style: TextStyle(
+          fontSize: 16,
+          color: log.status.toLowerCase() == "active" ? Colors.green : Colors.blue, 
+        ),
+      ),
+    ),
+    const SizedBox(height: 20),
+ ],), ),  ),  );
+} }
+
+
+        

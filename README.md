@@ -1,6 +1,6 @@
 Cyberlog – Flutter Project
 This repository contains a Flutter application, created as part of my mobile development learning process.
-
+1] Session 1 - Basics
 1. What I Learned
    
 1.1 Native vs Cross-Platform Development -
@@ -88,7 +88,7 @@ Go to Developer Options.
 Enable USB Debugging.
 
 
-2] ODD/EVEN CHECKER
+2] Session 2- ODD/EVEN CHECKER
 
 Even/Odd Checker App – README Update
 Integration
@@ -128,7 +128,21 @@ Using $number inserts the actual value directly into the message without needing
 This makes the final output text simple, readable, and dynamic.
 
 
+3] Session 3
 
+The cyberlog repository is updated with a new project combining fundamentals and understanding of List, Map() Method, Classes and Objects
+
+In this project:
+A Log class was created with three properties: action, timestamp, and status. This class groups all related information for a single log entry into one structured object.
+
+Inside the main widget, a List<Log> was built containing sample Log objects. This allows storing multiple log entries in one collection.
+Example-
+      Log(action: "Sign-in", timestamp: DateTime.now(), status: "Active"),
+    
+
+The code uses a loop via the map() method to iterate over the list. For each Log object in the list, a Text widget is generated to display data (action and timestamp, and in another loop, status).
+
+By using class data structure with list iteration for UI generation, the code stays clean, organized, and scalable. Adding more log entries is simple by just adding another Log object to the list, they will appear on screen without changing the UI code.
 
 
 

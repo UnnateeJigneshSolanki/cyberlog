@@ -1,4 +1,5 @@
-Cyberlog – Flutter Sessions
+Cyberlog – Flutter Sessions.
+
 This repository contains things I have learnt as a part of my Flutter Development process.
 
 Session 1 - Basics
@@ -8,37 +9,37 @@ Native development requires separate codebases for Android (Kotlin/Java) and iOS
 Cross-platform development allows building a single codebase that runs on multiple platforms. Flutter is an example of a cross-platform framework that compiles to native machine code and offers consistent UI across devices.
 
 1.2 Hot Reload -
-Hot Reload is one of Flutter’s core productivity features.
-It injects code changes directly into the running app.
-The app updates instantly without losing its current state.
-It helps during UI building, layout adjustments, and minor logic changes.
+● Hot Reload is one of Flutter’s core productivity features.
+● It injects code changes directly into the running app.
+● The app updates instantly without losing its current state.
+● It helps during UI building, layout adjustments, and minor logic changes.
 
 1.3 Widgets -
-Flutter uses a widget-based architecture.
-Everything in Flutter is a widget (layout, text, padding, rows, columns, and the entire app itself).
-Widgets can be stateless (no change at runtime) or stateful (dynamic).
-Apps uses fundamental widgets such as MaterialApp, Scaffold, AppBar, Center, and Text.
+● Flutter uses a widget based architecture.
+● Everything in Flutter is a widget (layout, text, padding, rows, columns, and the entire app itself).
+● Widgets can be stateless (no change at runtime) or stateful (dynamic).
+● Apps uses fundamental widgets such as MaterialApp, Scaffold, AppBar, Center, and Text.
 
 1.4 Steps to follow to install and setup Flutter
    
 1.4.1 Install the Flutter SDK -
-Download the Flutter SDK from the official website: https://flutter.dev
-Extract it to a simple directory (for example: C:\flutter).
+● Download the Flutter SDK from the official website: https://flutter.dev
+● Extract it to a simple directory (for example: C:\flutter).
 Add the flutter/bin folder to the system PATH.
-Open a new terminal and verify the installation using:
+● Open a new terminal and verify the installation using:
 flutter --version
 
 1.4.2 Install Android Studio -
 Android Studio is required for:
-Android SDK
-ADB (Android Debug Bridge)
-Platform tools and build tools
-Emulator (AVD Manager)
+- Android SDK
+- ADB (Android Debug Bridge)
+- Platform tools and build tools
+- Emulator (AVD Manager)
 Inside Android Studio, ensure the following are installed:
-Android SDK
-SDK Platform (for example, Android 14)
-Android Virtual Device
-Flutter and Dart plugins
+- Android SDK
+- SDK Platform (for example, Android 14)
+- Android Virtual Device
+- Flutter and Dart plugins
 
 1.4.3 Running flutter doctor -
 This command checks if all tools and dependencies are installed correctly.
@@ -100,30 +101,32 @@ These concepts together form the foundation of interactive Flutter applications.
 2.2 - JIT vs AOT Compilation
 
 Flutter uses two compilation techniques to balance development speed and runtime performance.
-2.2.1 - Just-In-Time (JIT) Compilation
-Used during development while running the app on an emulator or device
-Compiles code while the application is running
-Enables Hot Reload, allowing instant UI and logic updates
-Helps developers test changes quickly without restarting the app
-2.2.2 - Ahead-Of-Time (AOT) Compilation
-Used for release builds submitted to the Play Store or App Store
-Compiles Dart code into optimized native machine code before execution
-Results in faster startup time and smoother performance
-Improves efficiency and user experience in production
-Flutter uses JIT to improve developer productivity and AOT to ensure high performance for end users.
+2.2.1 - Just-In-Time (JIT) Compilation:
+● Used during development while running the app on an emulator or device
+● Compiles code while the application is running
+● Enables Hot Reload, allowing instant UI and logic updates
+● Helps developers test changes quickly without restarting the app
+2.2.2 - Ahead-Of-Time (AOT) Compilation:
+● Used for release builds submitted to the Play Store or App Store
+● Compiles Dart code into optimized native machine code before execution
+● Results in faster startup time and smoother performance
+● Improves efficiency and user experience in production.
+
+- Flutter uses JIT to improve developer productivity and AOT to ensure high performance for end users.
 
 2.3 - Code Implementation – Even/Odd Checker App
-The Even/Odd Checker App implements the concepts learned in Session 2..
+The Even/Odd Checker App implements the concepts learned in Session 2.
 
 The implementation includes:
-A TextField to accept a numeric value from the user
-An ElevatedButton to trigger the even/odd check
-Conversion of user input from String to integer
-Use of if-else conditional logic to check whether the number is divisible by 2
-Storage of the result message in a String variable
-Display of the result using a Text widget
-Use of string interpolation to format the output message dynamically
+● A TextField to accept a numeric value from the user
+● An ElevatedButton to trigger the even/odd check
+● Conversion of user input from String to integer
+● Use of if-else conditional logic to check whether the number is divisible by 2
+● Storage of the result message in a String variable
+● Display of the result using a Text widget
+● Use of string interpolation to format the output message dynamically
 This implementation demonstrates how Dart logic interacts with Flutter UI components to create a simple, interactive application.
+
 (screenshots)- ![session2](https://github.com/user-attachments/assets/64345476-3f6f-48b6-a198-38beb9895dfc)
 ![session2(1)](https://github.com/user-attachments/assets/48033e9c-a980-4a60-b92e-e1ed9a84490d)
 

@@ -278,3 +278,73 @@ It is to control the background color, AppBar color, and bottom navigation color
 (screenshots)- ![session6(3)](https://github.com/user-attachments/assets/bc6bef8a-e2bb-4d08-9682-f8846c56699b)
 ![session6(2)](https://github.com/user-attachments/assets/c7f528bc-f794-4be3-bc7c-9463fc16686f)
 ![session6(1)](https://github.com/user-attachments/assets/070247df-13d5-4058-a518-1feab6966c50)
+
+
+Session 7 - Provider State Management
+
+---
+
+7.1 - What is Provider in State Management?
+
+Need of state management
+* Mobile apps must remember changing data like counters, logs, settings, and user actions.
+* This changing data is called state
+* Flutter rebuilds UI frequently, so state must be handled carefully.
+* Poor state handling causes UI resets, lost data, and inconsistent behavior.
+
+What is Provider?
+* Provider is a Flutter state management library.
+* It stores state outside the UI.
+* It shares state across multiple widgets.
+* It automatically rebuilds UI when data changes.
+
+Core Concepts of Provider
+* ChangeNotifier A class that holds state and notifies the UI when state changes.
+* notifyListeners(): Tells Flutter to rebuild widgets that are listening to the state.
+* ChangeNotifierProvider: Makes the state available to widgets below it in the widget tree.
+* MultiProvider: Used when the app has more than one provider.
+
+Why Provider Over setState?
+* setState works only inside one widget.
+* Provider allows state sharing across screens.
+* Provider scales better for real-world apps.
+
+7.2 - Portfolio Assignment – CyberLog Implementation
+
+Provider Setup
+* MultiProvider is used to manage multiple states.
+* LogsProvider manages user activity logs.
+* SettingsProvider manages app settings.
+LogsProvider
+* Stores logs in a List<String>.
+* addLog() method adds new logs dynamically.
+* notifyListeners() updates the Logs screen automatically.
+SettingsProvider
+* Manages settings like Notifications, Privacy, and Dark Mode.
+* Each setting is stored as a boolean.
+* When a setting is toggled, a log entry is added.
+* notifyListeners() refreshes the Settings UI.
+Runtime Interaction Between Settings and Logs
+* When a user enables or disables a setting:
+  * The setting state changes.
+  * A corresponding log is added (example: "Notifications disabled").
+  * Logs screen updates instantly.
+* This demonstrates real-time state management using Provider.
+Bottom Navigation
+* setState is used only to switch tabs.
+* App data (logs and settings) is managed using Provider.
+
+7.3 - Key Learning
+
+* Provider is created once at the top of the app.
+* State is accessed anywhere without passing data manually.
+* UI updates automatically when state changes.
+
+(screenshots) :
+![session7(6)](https://github.com/user-attachments/assets/1ce64086-0994-4f7b-a107-423b461cd2be)
+![session7(5)](https://github.com/user-attachments/assets/3487643e-a028-4061-bd70-6e5bbec3a8f8)
+![session7(4)](https://github.com/user-attachments/assets/925cca8d-1c5f-48de-bd87-0fa92ea6aec6)
+![session7(3)](https://github.com/user-attachments/assets/7c15e3a7-ec0f-49d3-a96a-2b1f2ffae791)
+![session7(2)](https://github.com/user-attachments/assets/5f2f77cc-62c4-4dad-9557-f22547ff2d38)
+![session7(1)](https://github.com/user-attachments/assets/8e745496-2f01-4c89-8a0c-e842d20c3f6b)
+

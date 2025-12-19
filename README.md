@@ -1,4 +1,5 @@
-Cyberlog – Flutter Sessions
+Cyberlog – Flutter Sessions.
+
 This repository contains things I have learnt as a part of my Flutter Development process.
 
 Session 1 - Basics
@@ -8,37 +9,37 @@ Native development requires separate codebases for Android (Kotlin/Java) and iOS
 Cross-platform development allows building a single codebase that runs on multiple platforms. Flutter is an example of a cross-platform framework that compiles to native machine code and offers consistent UI across devices.
 
 1.2 Hot Reload -
-Hot Reload is one of Flutter’s core productivity features.
-It injects code changes directly into the running app.
-The app updates instantly without losing its current state.
-It helps during UI building, layout adjustments, and minor logic changes.
+● Hot Reload is one of Flutter’s core productivity features.
+● It injects code changes directly into the running app.
+● The app updates instantly without losing its current state.
+● It helps during UI building, layout adjustments, and minor logic changes.
 
 1.3 Widgets -
-Flutter uses a widget-based architecture.
-Everything in Flutter is a widget (layout, text, padding, rows, columns, and the entire app itself).
-Widgets can be stateless (no change at runtime) or stateful (dynamic).
-Apps uses fundamental widgets such as MaterialApp, Scaffold, AppBar, Center, and Text.
+● Flutter uses a widget based architecture.
+● Everything in Flutter is a widget (layout, text, padding, rows, columns, and the entire app itself).
+● Widgets can be stateless (no change at runtime) or stateful (dynamic).
+● Apps uses fundamental widgets such as MaterialApp, Scaffold, AppBar, Center, and Text.
 
 1.4 Steps to follow to install and setup Flutter
    
 1.4.1 Install the Flutter SDK -
-Download the Flutter SDK from the official website: https://flutter.dev
-Extract it to a simple directory (for example: C:\flutter).
+● Download the Flutter SDK from the official website: https://flutter.dev
+● Extract it to a simple directory (for example: C:\flutter).
 Add the flutter/bin folder to the system PATH.
-Open a new terminal and verify the installation using:
+● Open a new terminal and verify the installation using:
 flutter --version
 
 1.4.2 Install Android Studio -
 Android Studio is required for:
-Android SDK
-ADB (Android Debug Bridge)
-Platform tools and build tools
-Emulator (AVD Manager)
+- Android SDK
+- ADB (Android Debug Bridge)
+- Platform tools and build tools
+- Emulator (AVD Manager)
 Inside Android Studio, ensure the following are installed:
-Android SDK
-SDK Platform (for example, Android 14)
-Android Virtual Device
-Flutter and Dart plugins
+- Android SDK
+- SDK Platform (for example, Android 14)
+- Android Virtual Device
+- Flutter and Dart plugins
 
 1.4.3 Running flutter doctor -
 This command checks if all tools and dependencies are installed correctly.
@@ -100,30 +101,32 @@ These concepts together form the foundation of interactive Flutter applications.
 2.2 - JIT vs AOT Compilation
 
 Flutter uses two compilation techniques to balance development speed and runtime performance.
-2.2.1 - Just-In-Time (JIT) Compilation
-Used during development while running the app on an emulator or device
-Compiles code while the application is running
-Enables Hot Reload, allowing instant UI and logic updates
-Helps developers test changes quickly without restarting the app
-2.2.2 - Ahead-Of-Time (AOT) Compilation
-Used for release builds submitted to the Play Store or App Store
-Compiles Dart code into optimized native machine code before execution
-Results in faster startup time and smoother performance
-Improves efficiency and user experience in production
-Flutter uses JIT to improve developer productivity and AOT to ensure high performance for end users.
+2.2.1 - Just-In-Time (JIT) Compilation:
+● Used during development while running the app on an emulator or device
+● Compiles code while the application is running
+● Enables Hot Reload, allowing instant UI and logic updates
+● Helps developers test changes quickly without restarting the app
+2.2.2 - Ahead-Of-Time (AOT) Compilation:
+● Used for release builds submitted to the Play Store or App Store
+● Compiles Dart code into optimized native machine code before execution
+● Results in faster startup time and smoother performance
+● Improves efficiency and user experience in production.
+
+- Flutter uses JIT to improve developer productivity and AOT to ensure high performance for end users.
 
 2.3 - Code Implementation – Even/Odd Checker App
-The Even/Odd Checker App implements the concepts learned in Session 2..
+The Even/Odd Checker App implements the concepts learned in Session 2.
 
 The implementation includes:
-A TextField to accept a numeric value from the user
-An ElevatedButton to trigger the even/odd check
-Conversion of user input from String to integer
-Use of if-else conditional logic to check whether the number is divisible by 2
-Storage of the result message in a String variable
-Display of the result using a Text widget
-Use of string interpolation to format the output message dynamically
+● A TextField to accept a numeric value from the user
+● An ElevatedButton to trigger the even/odd check
+● Conversion of user input from String to integer
+● Use of if-else conditional logic to check whether the number is divisible by 2
+● Storage of the result message in a String variable
+● Display of the result using a Text widget
+● Use of string interpolation to format the output message dynamically
 This implementation demonstrates how Dart logic interacts with Flutter UI components to create a simple, interactive application.
+
 (screenshots)- ![session2](https://github.com/user-attachments/assets/64345476-3f6f-48b6-a198-38beb9895dfc)
 ![session2(1)](https://github.com/user-attachments/assets/48033e9c-a980-4a60-b92e-e1ed9a84490d)
 
@@ -275,3 +278,73 @@ It is to control the background color, AppBar color, and bottom navigation color
 (screenshots)- ![session6(3)](https://github.com/user-attachments/assets/bc6bef8a-e2bb-4d08-9682-f8846c56699b)
 ![session6(2)](https://github.com/user-attachments/assets/c7f528bc-f794-4be3-bc7c-9463fc16686f)
 ![session6(1)](https://github.com/user-attachments/assets/070247df-13d5-4058-a518-1feab6966c50)
+
+
+Session 7 - Provider State Management
+
+---
+
+7.1 - What is Provider in State Management?
+
+Need of state management
+* Mobile apps must remember changing data like counters, logs, settings, and user actions.
+* This changing data is called state
+* Flutter rebuilds UI frequently, so state must be handled carefully.
+* Poor state handling causes UI resets, lost data, and inconsistent behavior.
+
+What is Provider?
+* Provider is a Flutter state management library.
+* It stores state outside the UI.
+* It shares state across multiple widgets.
+* It automatically rebuilds UI when data changes.
+
+Core Concepts of Provider
+* ChangeNotifier A class that holds state and notifies the UI when state changes.
+* notifyListeners(): Tells Flutter to rebuild widgets that are listening to the state.
+* ChangeNotifierProvider: Makes the state available to widgets below it in the widget tree.
+* MultiProvider: Used when the app has more than one provider.
+
+Why Provider Over setState?
+* setState works only inside one widget.
+* Provider allows state sharing across screens.
+* Provider scales better for real-world apps.
+
+7.2 - Portfolio Assignment – CyberLog Implementation
+
+Provider Setup
+* MultiProvider is used to manage multiple states.
+* LogsProvider manages user activity logs.
+* SettingsProvider manages app settings.
+LogsProvider
+* Stores logs in a List<String>.
+* addLog() method adds new logs dynamically.
+* notifyListeners() updates the Logs screen automatically.
+SettingsProvider
+* Manages settings like Notifications, Privacy, and Dark Mode.
+* Each setting is stored as a boolean.
+* When a setting is toggled, a log entry is added.
+* notifyListeners() refreshes the Settings UI.
+Runtime Interaction Between Settings and Logs
+* When a user enables or disables a setting:
+  * The setting state changes.
+  * A corresponding log is added (example: "Notifications disabled").
+  * Logs screen updates instantly.
+* This demonstrates real-time state management using Provider.
+Bottom Navigation
+* setState is used only to switch tabs.
+* App data (logs and settings) is managed using Provider.
+
+7.3 - Key Learning
+
+* Provider is created once at the top of the app.
+* State is accessed anywhere without passing data manually.
+* UI updates automatically when state changes.
+
+(screenshots) :
+![session7(6)](https://github.com/user-attachments/assets/1ce64086-0994-4f7b-a107-423b461cd2be)
+![session7(5)](https://github.com/user-attachments/assets/3487643e-a028-4061-bd70-6e5bbec3a8f8)
+![session7(4)](https://github.com/user-attachments/assets/925cca8d-1c5f-48de-bd87-0fa92ea6aec6)
+![session7(3)](https://github.com/user-attachments/assets/7c15e3a7-ec0f-49d3-a96a-2b1f2ffae791)
+![session7(2)](https://github.com/user-attachments/assets/5f2f77cc-62c4-4dad-9557-f22547ff2d38)
+![session7(1)](https://github.com/user-attachments/assets/8e745496-2f01-4c89-8a0c-e842d20c3f6b)
+

@@ -492,7 +492,7 @@ This implementation shows how an API is used in the CyberLog app to fetch live d
 
 ----
 (screenshots)
-![session8](https://github.com/user-attachments/assets/23853cb0-85c9-42b2-ab74-df1fefafa94d)
-![session8(3)](https://github.com/user-attachments/assets/7da8e962-b7a8-466d-948c-51dd628cfe84)
-![session8(2)](https://github.com/user-attachments/assets/cc2014dd-2fbd-4eba-8de2-d6db23f27f79)
+- ![session8](https://github.com/user-attachments/assets/23853cb0-85c9-42b2-ab74-df1fefafa94d)
+- ![session8(3)](https://github.com/user-attachments/assets/7da8e962-b7a8-466d-948c-51dd628cfe84)
+- ![session8(2)](https://github.com/user-attachments/assets/cc2014dd-2fbd-4eba-8de2-d6db23f27f79)
 

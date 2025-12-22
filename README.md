@@ -348,3 +348,151 @@ Bottom Navigation
 ![session7(2)](https://github.com/user-attachments/assets/5f2f77cc-62c4-4dad-9557-f22547ff2d38)
 ![session7(1)](https://github.com/user-attachments/assets/8e745496-2f01-4c89-8a0c-e842d20c3f6b)
 
+
+## Session 8 – Working with APIs in Flutter
+
+### 1. Why APIs Are Important
+- Apps containing only static UI, local logic, and fixed content are not realtime
+- Real-world apps do not work in isolation
+- Real apps fetch live data, update content dynamically, and communicate with servers
+- APIs help transform a Flutter app from a UI-only app into a real, data-driven application
+
+---
+
+### 2. Client–Server Architecture
+Every modern app has two main parts:
+- **Client (Flutter App):** Handles UI, user interaction, and data display
+- **Server (API):** Handles data storage, processing, and logic
+
+Flow:
+- The Flutter app sends a request to the server
+- The server sends back a response
+- The app reads the data and displays it on the screen
+
+---
+
+### 3. What Is an API
+- API stands for **Application Programming Interface**
+- In simple terms, an API allows apps to talk to other apps
+- An API works like a middleman between the app and the server
+
+Common examples:
+- Weather apps use Weather APIs
+- Social media apps use platform APIs
+- Cybersecurity apps use threat intelligence APIs
+
+---
+
+### 4. HTTP Basics
+- HTTP is the protocol used to send and receive data over the internet
+- Flutter apps use HTTP to communicate with APIs
+
+Common HTTP methods:
+- **GET:** Fetch data from the server
+- **POST:** Send data to the server
+- **PUT:** Update existing data
+- **DELETE:** Remove data
+
+---
+
+### 5. Using HTTP in Flutter
+- Flutter does not access the internet by default
+- The `http` package is used to make network requests
+
+Steps followed:
+- Add http dependency in `pubspec.yaml`
+- Run `flutter pub get`
+- Import the package using  
+  `import 'package:http/http.dart' as http;`
+
+---
+
+### 6. JSON Data Format
+- Most APIs return data in JSON format
+- JSON is structured key–value data
+- In Dart, JSON is converted into a `Map<String, dynamic>`
+- Values are accessed using keys, for example: `json['fact']`
+
+---
+
+### 7. Model Classes
+- Using raw JSON directly makes code messy and hard to manage
+- Model classes represent structured data in Dart
+- A model class converts JSON into a Dart object
+- This improves code readability, reduces bugs, and keeps UI clean
+- Model classes follow industry-standard practices
+
+---
+
+### 8. API Call Flow
+- Button press triggers an async function
+- An HTTP GET request is sent to the server
+- The server sends a response
+- JSON data is decoded
+- UI updates using `setState()`
+
+---
+
+### 9. Async Programming
+- API calls take time to complete
+- `async` and `await` prevent the UI from freezing
+- `Future` handles operations that complete later
+- UI updates only after data is received
+
+----
+### Code Implementation – Cyber Tip of the Day (API Integration)
+
+This implementation shows how an API is used in the CyberLog app to fetch live data from the internet and display it on the screen.
+
+---
+
+#### StatefulWidget and Data Storage
+- The screen is created using a `StatefulWidget` because the data on the screen changes after the API call.
+- A String variable `cyberTip` is used to store the text shown in the UI.
+- Initially, the variable contains a message asking the user to press the button.
+
+---
+
+#### Fetching Data from an API
+- The function `fetchTip()` is used to fetch data from the API.
+- The function is marked `async` because internet calls take time.
+- `await` is used so the app waits for the response without freezing the UI.
+- `http.get()` sends a GET request to the API URL.
+- The API response is in JSON format.
+
+---
+
+#### JSON Decoding and Data Access
+- `json.decode(response.body)` converts the JSON response into a Dart Map.
+- The required data is accessed using keys:
+  - `data['slip']['advice']`
+- The fetched advice is stored in the `cyberTip` variable.
+- `setState()` is used to update the UI with the new data.
+
+---
+
+#### User Interface Overview
+- `Scaffold` provides the basic screen structure.
+- `AppBar` displays the title **CyberLog Dashboard**.
+- A centered `Column` is used to arrange UI elements vertically.
+- A `Container` displays the cyber tip card:
+  - Icon for visual context
+  - Title text
+  - Dynamic text fetched from the API
+- An `ElevatedButton` triggers the API call.
+- On button press, `fetchTip()` executes and updates the UI instantly.
+
+---
+
+#### Result
+- Live data is fetched from the internet.
+- The UI updates dynamically when the button is pressed.
+- The app demonstrates real-world API usage using HTTP and JSON.
+- This feature makes the CyberLog app data-driven instead of static.
+
+----
+(screenshots)
+![session8](https://github.com/user-attachments/assets/23853cb0-85c9-42b2-ab74-df1fefafa94d)
+![session8(3)](https://github.com/user-attachments/assets/7da8e962-b7a8-466d-948c-51dd628cfe84)
+![session8(2)](https://github.com/user-attachments/assets/cc2014dd-2fbd-4eba-8de2-d6db23f27f79)
+

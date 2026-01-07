@@ -1,71 +1,145 @@
-import 'package:flutter/material.dart';import 'package:hive_flutter/hive_flutter.dart';
-void main() async {
-  await Hive.initFlutter();
-  await Hive.openBox('checklist');
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:path_provider/path_provider.dart';
+
+void main() {
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
-  Widget build(BuildContext context) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFE8F5E9),
-          appBarTheme: const AppBarTheme( backgroundColor: Color(0xFF388E3C), foregroundColor: Colors.white), ),
-        home: const ChecklistScreen(),
-);}
-class ChecklistScreen extends StatefulWidget {
-  const ChecklistScreen({super.key});
-  @override
-  State<ChecklistScreen> createState() => _ChecklistScreenState();
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: ProfileScreen(),
+    );
+  }
 }
-class _ChecklistScreenState extends State<ChecklistScreen> {
-  final box = Hive.box('checklist');
-  List<Map<String, dynamic>> get tasks {
-    final rawList = box.get('tasks', defaultValue: []);
-    return List<Map<String, dynamic>>.from(rawList.map((e) => Map<String, dynamic>.from(e)));
+
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final ImagePicker _picker = ImagePicker();
+  File? _image;
+
+  Future<bool> _cameraPermission() async {
+    final status = await Permission.camera.request();
+    return status.isGranted;
   }
-  void _addTask(String title) {
-    final t = tasks;
-    t.add({'title': title, 'done': false});
-    box.put('tasks', t);
-    setState(() {});
+
+  Future<bool> _storagePermission() async {
+    if (Platform.isAndroid) {
+      final status = await Permission.photos.request();
+      return status.isGranted;
+    }
+    return true;
   }
-  void _toggleTask(int index) {
-    final t = tasks;
-    t[index]['done'] = !t[index]['done'];
-    box.put('tasks', t);
-    setState(() {});
+
+  Future<void> _pick(ImageSource source) async {
+    if (await _cameraPermission() && await _storagePermission()) {
+      final XFile? file = await _picker.pickImage(source: source);
+      if (file == null) return;
+      await _saveImage(File(file.path));
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Permission denied")));
+    }
   }
-  void _showAddTaskDialog() {
-    final controller = TextEditingController();
-    showDialog(
+
+  Future<void> _saveImage(File img) async {
+    Directory dir;
+    if (Platform.isAndroid) {
+      dir = Directory('/storage/emulated/0/Pictures/CyberLog');
+    } else {
+      dir = await getApplicationDocumentsDirectory();
+    }
+
+    if (!dir.existsSync()) {
+      dir.createSync(recursive: true);
+    }
+
+    final path =
+        '${dir.path}/IMG_${DateTime.now().millisecondsSinceEpoch}.jpg';
+    final saved = await img.copy(path);
+
+    setState(() => _image = saved);
+
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text("Saved in CyberLog folder")));
+  }
+
+  void _showPicker() {
+    showModalBottomSheet(
       context: context,
-      builder: (_) => AlertDialog(
-        title: const Text('Add Task'),
-        content: TextField(controller: controller, autofocus: true),
-        actions: [ TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-          TextButton( onPressed: () {if (controller.text.trim().isNotEmpty) _addTask(controller.text.trim());
-                Navigator.pop(context);
-              }, child: const Text('Add'))
-        ], ), ); }
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (_) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTile(
+            leading: const Icon(Icons.camera_alt),
+            title: const Text("Take Photo"),
+            onTap: () {
+              Navigator.pop(context);
+              _pick(ImageSource.camera);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.photo),
+            title: const Text("Choose from Gallery"),
+            onTap: () {
+              Navigator.pop(context);
+              _pick(ImageSource.gallery);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final t = tasks;
-    return Scaffold( appBar: AppBar(title: const Text('Daily Checklist')),
-      body: Padding( padding: const EdgeInsets.all(12),
-        child: Column( children: [
-            Expanded( child: t.isEmpty ? const Center( child: Text( 'No tasks yet.\nAdd a task to start!',
-                      textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xFF2E7D32)),
-                      ), ): ListView.builder(itemCount: t.length,itemBuilder: (_, i) => CheckboxListTile(
-                      title: Text(t[i]['title'],style: TextStyle(decoration: t[i]['done'] ? TextDecoration.lineThrough : null,
-                            color: t[i]['done'] ? const Color(0xFF2E7D32) : Colors.black87,),),
-                        value: t[i]['done'], onChanged: (_) => _toggleTask(i),
-                      ), ), ),
-            SizedBox( width: double.infinity,
-              child: ElevatedButton( onPressed: _showAddTaskDialog, style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF66BB6A),
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    textStyle: const TextStyle(fontSize: 18)), child: const Text('Add Task'),
-              ),),], ),
-      ),); }
+    final s = MediaQuery.of(context).size;
+    return Scaffold(
+      backgroundColor: Colors.deepPurple,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: _showPicker,
+              child: Container(
+                width: s.width * 0.45,
+                height: s.width * 0.45,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                  image: _image != null
+                      ? DecorationImage(
+                          image: FileImage(_image!), fit: BoxFit.cover)
+                      : null,
+                ),
+                child: _image == null
+                    ? Icon(Icons.person,
+                        size: s.width * 0.25, color: Colors.deepPurple)
+                    : null,
+              ),
+            ),
+            const SizedBox(height: 25),
+            const Text(
+              "Tap to change profile picture",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
